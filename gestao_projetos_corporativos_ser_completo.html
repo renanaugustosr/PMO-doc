@@ -1,0 +1,479 @@
+
+<h2 class="sr-only">Gestão de Projetos Corporativos SER/PRODEMGE — Processo, Templates e Rituais</h2>
+<style>
+*{box-sizing:border-box}
+.eyebrow{font-size:9.5px;font-weight:500;letter-spacing:.1em;color:var(--color-text-tertiary);text-transform:uppercase;margin:0 0 4px}
+.pg-title{font-size:20px;font-weight:500;color:var(--color-text-primary);margin:0 0 4px}
+.pg-sub{font-size:13px;color:var(--color-text-secondary);margin:0 0 10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font-size:10px;padding:2px 9px;border-radius:20px;border:0.5px solid var(--color-border-secondary);color:var(--color-text-secondary);display:flex;align-items:center;gap:3px}
+.chip i{font-size:10px}
+.sdiv{display:flex;align-items:center;gap:7px;font-size:12.5px;font-weight:500;color:var(--color-text-secondary);padding:1.25rem 0 .5rem;border-top:0.5px solid var(--color-border-tertiary);margin-top:.5rem}
+.sdiv i{font-size:16px}
+.sdiv-first{border-top:none;padding-top:.5rem}
+.svgph{cursor:pointer}
+.svgph.dim{opacity:.55;transition:opacity .15s}
+.svgph.sel rect{stroke-width:2!important}
+.pnav{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.75rem}
+.ptab{display:flex;align-items:center;gap:5px;padding:5px 13px;border-radius:20px;border:0.5px solid var(--color-border-secondary);font-size:12px;cursor:pointer;color:var(--color-text-secondary);background:var(--color-background-primary);white-space:nowrap;transition:all .12s}
+.ptab.on{border-color:var(--color-border-primary);color:var(--color-text-primary);font-weight:500;background:var(--color-background-secondary)}
+.pdot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.pcard{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:.9rem 1rem .9rem 1.1rem;margin-bottom:.75rem;position:relative;overflow:hidden}
+.pcard-bar{position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:4px 0 0 4px}
+.pcard-name{font-size:14px;font-weight:500;color:var(--color-text-primary);margin:0 0 3px}
+.pcard-desc{font-size:12px;color:var(--color-text-secondary);margin:0 0 9px;line-height:1.55}
+.pcard-meta{display:flex;gap:10px;flex-wrap:wrap}
+.pmeta{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--color-text-secondary)}
+.pmeta i{font-size:13px;color:var(--color-text-tertiary)}
+.anav{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.75rem;padding-bottom:.65rem;border-bottom:0.5px solid var(--color-border-tertiary)}
+.atab{padding:4px 11px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-tertiary);font-size:11px;cursor:pointer;color:var(--color-text-secondary);background:var(--color-background-primary);transition:all .12s}
+.atab.on{border-color:var(--color-border-primary);color:var(--color-text-primary);font-weight:500;background:var(--color-background-secondary)}
+.atab:hover:not(.on){border-color:var(--color-border-secondary)}
+.tname{font-size:14px;font-weight:500;color:var(--color-text-primary);margin:0 0 3px}
+.tdesc{font-size:12px;color:var(--color-text-secondary);margin:0 0 .85rem;line-height:1.55}
+table{width:100%;border-collapse:collapse;font-size:11.5px}
+th{background:var(--color-background-secondary);color:var(--color-text-secondary);font-weight:500;padding:6px 9px;text-align:left;border:0.5px solid var(--color-border-tertiary);font-size:10.5px;white-space:nowrap}
+td{padding:6px 9px;border:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary);vertical-align:top;line-height:1.45}
+tr:nth-child(even) td{background:var(--color-background-secondary)}
+.tov{overflow-x:auto}
+.sb{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:.6rem .85rem;margin:0 0 6px}
+.sb-t{font-size:10px;font-weight:500;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.07em;margin:0 0 4px}
+.sb-c{font-size:12px;color:var(--color-text-tertiary);font-style:italic;margin:0;line-height:1.55;white-space:pre-line}
+.frow{display:grid;grid-template-columns:repeat(auto-fit,minmax(115px,1fr));gap:6px;margin:0 0 6px}
+.fld{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:5px 8px}
+.fld-l{font-size:9px;font-weight:500;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.07em;display:block;margin-bottom:2px}
+.fld-v{font-size:11.5px;color:var(--color-text-tertiary);font-style:italic}
+.chk{display:flex;align-items:flex-start;gap:7px;padding:4px 0;border-bottom:0.5px solid var(--color-border-tertiary)}
+.chk:last-child{border-bottom:none}
+.chkb{width:13px;height:13px;border:0.5px solid var(--color-border-primary);border-radius:3px;flex-shrink:0;margin-top:1px}
+.chkt{font-size:12px;color:var(--color-text-secondary);line-height:1.45}
+.grpt{font-size:10.5px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.06em;margin:10px 0 5px}
+.ep-wrap{border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);overflow:hidden;margin-bottom:.75rem}
+.ep-row{display:grid;grid-template-columns:72px 1fr;border-bottom:0.5px solid var(--color-border-tertiary)}
+.ep-row:last-child{border-bottom:none}
+.ep-l{padding:8px 10px;font-size:9.5px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.07em;background:var(--color-background-secondary);border-right:0.5px solid var(--color-border-tertiary);display:flex;align-items:center}
+.ep-v{padding:8px 12px;font-size:12px;color:var(--color-text-tertiary);font-style:italic;display:flex;align-items:center}
+.kboard{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+.kcol{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:7px}
+.kcol-t{font-size:9.5px;font-weight:500;color:var(--color-text-secondary);text-align:center;margin:0 0 4px;text-transform:uppercase;letter-spacing:.05em}
+.kwip{font-size:8.5px;color:var(--color-text-tertiary);text-align:center;margin:0 0 5px}
+.kcard{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:5px 7px;margin:0 0 4px;font-size:11px;color:var(--color-text-secondary);line-height:1.4}
+.rg3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:.9rem}
+.rcol{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:.6rem}
+.rcol-t{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;margin:0 0 6px;padding:2px 7px;border-radius:3px;display:inline-block}
+.ritem{font-size:11.5px;color:var(--color-text-secondary);padding:3px 0;border-bottom:0.5px solid var(--color-border-tertiary);line-height:1.4}
+.ritem:last-child{border-bottom:none}
+.rit-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:9px}
+.rit-card{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem}
+.rit-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px;gap:8px}
+.rit-icon{font-size:22px;color:var(--color-text-tertiary)}
+.rit-freq{font-size:9.5px;padding:2px 8px;border-radius:20px;display:inline-block;font-weight:500;white-space:nowrap}
+.rit-title{font-size:13px;font-weight:500;color:var(--color-text-primary);margin:0 0 4px}
+.rit-who{font-size:11px;color:var(--color-text-secondary);margin:0 0 8px;line-height:1.4}
+.rit-who i{font-size:11px;vertical-align:-1px;margin-right:3px;color:var(--color-text-tertiary)}
+.rit-ul{margin:0;padding:0;list-style:none}
+.rit-ul li{font-size:11px;color:var(--color-text-secondary);padding:3px 0 3px 11px;position:relative;border-bottom:0.5px solid var(--color-border-tertiary);line-height:1.4}
+.rit-ul li:last-child{border-bottom:none}
+.rit-ul li::before{content:'·';position:absolute;left:0;color:var(--color-text-tertiary)}
+.note{font-size:11px;color:var(--color-text-tertiary);font-style:italic;margin:.5rem 0 .3rem;line-height:1.4}
+.bi{background:var(--color-background-info);color:var(--color-text-info)}
+.bs{background:var(--color-background-success);color:var(--color-text-success)}
+.bw{background:var(--color-background-warning);color:var(--color-text-warning)}
+.bd{background:var(--color-background-danger);color:var(--color-text-danger)}
+.bn{background:var(--color-background-secondary);color:var(--color-text-secondary)}
+</style>
+
+<div style="padding:.75rem 0 2rem">
+
+<div style="margin-bottom:.25rem">
+  <p class="eyebrow">PRODEMGE · Superintendência de Gestão da Estratégia e Resultados</p>
+  <p class="pg-title">Gestão de Projetos Corporativos</p>
+  <p class="pg-sub">Metodologia Scrum · PO: Diretoria Colegiada · WIP máximo: 4 squads ativos simultâneos</p>
+  <div class="chips">
+    <span class="chip"><i class="ti ti-user" aria-hidden="true"></i>Andrea Faluba — SM Central</span>
+    <span class="chip"><i class="ti ti-files" aria-hidden="true"></i>5 fases · 19 templates</span>
+    <span class="chip"><i class="ti ti-calendar" aria-hidden="true"></i>4 rituais de governança</span>
+  </div>
+</div>
+
+<div class="sdiv sdiv-first"><i class="ti ti-route" aria-hidden="true"></i>O Processo</div>
+<p style="font-size:11.5px;color:var(--color-text-secondary);margin:0 0 .75rem;line-height:1.5">Clique em uma fase para explorar artefatos e templates. O Gate de Entrada é deliberado pela Diretoria Colegiada no Portfolio Meeting mensal.</p>
+
+<svg width="100%" viewBox="0 0 680 138" role="img">
+  <title>Fluxo de fases do processo de gestão de projetos corporativos — SER/PRODEMGE</title>
+  <desc>Fases: Portfólio (contínuo), Ideação, Gate de Entrada, Lean Inception, Execução com ciclo de sprints, Entrega e encerramento</desc>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+  <line x1="83" y1="83" x2="592" y2="83" stroke="var(--color-border-tertiary)" stroke-width="0.5"/>
+  <path d="M530 62 C552 24,408 24,430 62" fill="none" stroke="var(--color-border-secondary)" stroke-width="0.75" stroke-dasharray="3 3" marker-end="url(#arr)"/>
+  <text class="ts" x="480" y="16" text-anchor="middle">ciclo de sprint</text>
+  <g class="svgph c-blue" id="svgp0" onclick="selP(0)">
+    <rect x="40" y="58" width="86" height="50" rx="8" stroke-width="0.5"/>
+    <text class="th" x="83" y="74" text-anchor="middle" dominant-baseline="central">Portfólio</text>
+    <text class="ts" x="83" y="93" text-anchor="middle" dominant-baseline="central">Contínuo</text>
+  </g>
+  <line x1="126" y1="83" x2="140" y2="83" stroke="var(--color-border-secondary)" stroke-width="0.75" marker-end="url(#arr)"/>
+  <g class="svgph c-teal" id="svgp1" onclick="selP(1)">
+    <rect x="140" y="58" width="86" height="50" rx="8" stroke-width="0.5"/>
+    <text class="th" x="183" y="74" text-anchor="middle" dominant-baseline="central">Ideação</text>
+    <text class="ts" x="183" y="93" text-anchor="middle" dominant-baseline="central">Descoberta</text>
+  </g>
+  <line x1="226" y1="83" x2="240" y2="83" stroke="var(--color-border-secondary)" stroke-width="0.75" marker-end="url(#arr)"/>
+  <polygon points="258,63 278,83 258,103 238,83" fill="var(--color-background-secondary)" stroke="var(--color-border-primary)" stroke-width="1"/>
+  <text class="ts" x="258" y="120" text-anchor="middle">Gate</text>
+  <line x1="278" y1="83" x2="292" y2="83" stroke="var(--color-border-secondary)" stroke-width="0.75" marker-end="url(#arr)"/>
+  <g class="svgph c-amber" id="svgp2" onclick="selP(2)">
+    <rect x="292" y="58" width="124" height="50" rx="8" stroke-width="0.5"/>
+    <text class="th" x="354" y="74" text-anchor="middle" dominant-baseline="central">Lean Inception</text>
+    <text class="ts" x="354" y="93" text-anchor="middle" dominant-baseline="central">1–5 dias</text>
+  </g>
+  <line x1="416" y1="83" x2="430" y2="83" stroke="var(--color-border-secondary)" stroke-width="0.75" marker-end="url(#arr)"/>
+  <g class="svgph c-coral" id="svgp3" onclick="selP(3)">
+    <rect x="430" y="58" width="100" height="50" rx="8" stroke-width="0.5"/>
+    <text class="th" x="480" y="74" text-anchor="middle" dominant-baseline="central">Execução</text>
+    <text class="ts" x="480" y="93" text-anchor="middle" dominant-baseline="central">Ciclos Scrum</text>
+  </g>
+  <line x1="530" y1="83" x2="544" y2="83" stroke="var(--color-border-secondary)" stroke-width="0.75" marker-end="url(#arr)"/>
+  <g class="svgph c-purple" id="svgp4" onclick="selP(4)">
+    <rect x="544" y="58" width="96" height="50" rx="8" stroke-width="0.5"/>
+    <text class="th" x="592" y="74" text-anchor="middle" dominant-baseline="central">Entrega</text>
+    <text class="ts" x="592" y="93" text-anchor="middle" dominant-baseline="central">Encerramento</text>
+  </g>
+</svg>
+
+<div class="sdiv" id="tmpl-sec"><i class="ti ti-file-description" aria-hidden="true"></i>Artefatos e Templates</div>
+<div class="pnav" id="pnav"></div>
+<div id="pcard"></div>
+<div class="anav" id="anav"></div>
+<div id="tmpl"></div>
+
+<div class="sdiv"><i class="ti ti-calendar-event" aria-hidden="true"></i>Rituais de Governança</div>
+<div class="rit-grid" id="rituals"></div>
+
+</div>
+
+<script>
+const BASE='https://stephanhagemann.com/agile_landscape/versions/v0-1/entries/';
+
+const PH=[
+  {id:0,name:'Portfólio',sub:'Nível corporativo · Permanente',dot:'var(--color-text-info)',acc:'var(--color-text-info)',bar:'var(--color-background-info)',
+   desc:'Nível corporativo permanente. A SER mantém o portfólio atualizado, prioriza por WSJF e controla o WIP máximo de 4 squads ativos simultaneamente.',
+   dur:'Contínuo',who:'Renan Augusto (SER) · Diretoria Colegiada · Andrea Faluba (SM Central)',
+   arts:['portfolio-backlog','wsjf','cfd','risk-log','strategic-theme']},
+  {id:1,name:'Ideação',sub:'1 a 2 semanas',dot:'var(--color-text-success)',acc:'var(--color-text-success)',bar:'var(--color-background-success)',
+   desc:'Estruturação do problema e preparação do Business Case. A área demandante submete o projeto ao Gate de Entrada para aprovação pela Diretoria Colegiada (PO).',
+   dur:'1 a 2 semanas',who:'Área demandante · SER (apoio metodológico) · Andrea Faluba',
+   arts:['business-case','personas']},
+  {id:2,name:'Lean Inception',sub:'1–5 dias',dot:'var(--color-text-warning)',acc:'var(--color-text-warning)',bar:'var(--color-background-warning)',
+   desc:'Alinhamento profundo entre negócio e tecnologia. Formato Express (1–2 dias) ou Completo (5 dias). A Diretoria Colegiada define visão, MVPs e prioridades.',
+   dur:'1 a 5 dias',who:'Diretoria Colegiada (PO) · Andrea Faluba (SM) · Líder Técnico · Especialistas convidados',
+   arts:['product-vision','define-success','definition-of-done','mvps']},
+  {id:3,name:'Execução',sub:'Sprints de 2 semanas',dot:'var(--color-text-danger)',acc:'var(--color-text-danger)',bar:'var(--color-background-danger)',
+   desc:'Ciclos iterativos e incrementais de 2 semanas. Cada sprint entrega um incremento utilizável. A Diretoria Colegiada valida entregas nas Sprint Reviews.',
+   dur:'Sprints de 2 semanas (contínuo até MVP pronto)',who:'Diretoria Colegiada (PO) · Andrea Faluba (SM) · Líder Técnico · Squad técnico',
+   arts:['sprint-planning','sprint-backlog','daily-meeting','kanban-board','burndown-chart','sprint-review','retrospectiva']},
+  {id:4,name:'Entrega',sub:'1 semana',dot:'var(--color-text-secondary)',acc:'var(--color-text-secondary)',bar:'var(--color-background-secondary)',
+   desc:'Homologação final, aceite formal pela Diretoria e encerramento do projeto. Squad dissolvido. Vaga liberada no WIP do portfólio para um novo projeto entrar.',
+   dur:'1 semana',who:'Diretoria Colegiada (aceite formal) · SER · Squad · Área receptora',
+   arts:['acceptance-testing','release-planning']},
+];
+
+const A={
+'portfolio-backlog':{n:'Portfolio Backlog',d:'Registro centralizado de todos os projetos — ativos, em fila e concluídos. Priorizado por WSJF. WIP máximo: 4 squads.',t:'table',
+  h:['ID','Nome do Projeto','Demandante','Alinhamento','WSJF Score','Prioridade','Status','Squad','Entrada'],
+  r:[['PJ-001','Portal do Cidadão Digital','DCIT','K2 / H2','8,4','1°','Em execução','Squad Alpha','03/02/2025'],
+     ['PJ-002','Automação RH — módulo férias','DAF','K1 / H1','6,2','2°','Em fila','—','18/03/2025'],
+     ['PJ-003','IA para triagem de chamados','SAT','K4 / H3','5,8','3°','Ideação','—','05/04/2025'],
+     ['PJ-00N','[Novo projeto]','[Área]','[K? / H?]','—','—','Backlog','—','__/__/____']]},
+
+'wsjf':{n:'WSJF — Weighted Shortest Job First',d:'Fórmula: WSJF = Custo de Atraso (CoD) ÷ Duração do Job. CoD = Valor de Negócio + Urgência de Tempo + Redução de Risco (1–10 cada). Maior score = maior prioridade.',t:'table',
+  h:['ID','Projeto','Valor Negócio','Urgência Tempo','Redução Risco','CoD Total','Duração (1–10)','WSJF Score'],
+  r:[['PJ-001','Portal Cidadão','9','8','7','24','3','8,0'],
+     ['PJ-002','Automação RH','6','7','5','18','3','6,0'],
+     ['PJ-003','IA Chamados','8','5','9','22','4','5,5'],
+     ['PJ-00N','[Novo projeto]','___','___','___','___','___','___']],
+  note:'WSJF = CoD ÷ Duração. Ex.: CoD=24, Duração=3 → Score=8,0. Maior score = maior prioridade.'},
+
+'cfd':{n:'CFD — Cumulative Flow Diagram',d:'Registre semanalmente o acumulado de projetos em cada fase. Gargalos aparecem quando uma coluna cresce desproporcionalmente em relação às seguintes.',t:'table',
+  h:['Semana','Backlog (acum.)','Em Ideação','Em Inception','Em Execução','Concluídos','Lead Time médio'],
+  r:[['Sem 1 — 07/01','5','1','0','1','0','—'],
+     ['Sem 2 — 14/01','6','2','1','1','0','—'],
+     ['Sem 3 — 21/01','7','2','1','2','1','42 dias'],
+     ['Sem N — __/__','___','___','___','___','___','___']],
+  note:'Dica: importe estes dados em planilha e gere um gráfico de área empilhada para visualizar gargalos do portfólio.'},
+
+'risk-log':{n:'Risk Log',d:'Registro contínuo de riscos do portfólio. Prob./Impacto: A=Alto · M=Médio · B=Baixo.',t:'table',
+  h:['ID','Risco','Categoria','Prob.','Impacto','Nível','Estratégia de Resposta','Responsável','Status'],
+  r:[['R-001','Squad sem disponibilidade técnica','Recursos','M','A','🔴 Alto','Mitigar — mapear backups e capacitar','Renan','Aberto'],
+     ['R-002','Mudança de prioridade pela Diretoria','Governança','B','A','🟡 Médio','Aceitar — registrar no RAE','Andrea','Monitorando'],
+     ['R-003','Atraso na entrega de requisitos','Processo','M','M','🟡 Médio','Mitigar — gate com critérios rígidos','SM do projeto','Aberto'],
+     ['R-00N','[Novo risco]','[Categoria]','___','___','—','[Estratégia]','[Responsável]','[Status]']]},
+
+'strategic-theme':{n:'Strategic Theme',d:'Define o tema estratégico que conecta um conjunto de projetos à estratégia corporativa da PRODEMGE. Um card por tema.',t:'sections',
+  s:[{t:'Nome do tema estratégico',c:'Ex.: Modernização da Gestão de TIC do Estado de Minas Gerais'},
+     {t:'Descrição',c:'Descreva em 2–3 frases o que o tema representa e por que é estratégico para a PRODEMGE.'},
+     {t:'Iniciativa estratégica vinculada',c:'K1 — Redesenho Organizacional / K2 — Modernização TIC / K3 — Reposicionamento Comercial / K4 — Aceleração IA / K5 — Infraestrutura Crítica (MAIS+)'},
+     {t:'Horizonte estratégico',c:'H1 (defender/expandir negócio atual) / H2 (negócios emergentes) / H3 (opções futuras)'},
+     {t:'Métricas de sucesso do tema',c:'Quais indicadores corporativos evidenciam o progresso deste tema?'},
+     {t:'Projetos do portfólio vinculados',c:'IDs do Portfolio Backlog que pertencem a este tema. Ex.: PJ-001, PJ-003.'},
+     {t:'Sponsor / PO do tema',c:'Diretoria Colegiada (por padrão) ou Diretor designado como sponsor.'}]},
+
+'business-case':{n:'Business Case',d:'Documento de suporte ao Gate de Entrada. Conciso e focado em valor estratégico — não em detalhamento técnico.',t:'bc',
+  blocks:[{t:'Identificação',fields:[['Título do Projeto','Nome descritivo'],['Demandante / Área','Área de origem'],['Data de Submissão','dd/mm/aaaa'],['Patrocinador','Diretor responsável']]},
+          {t:'Contexto e Problema',c:'Descreva a situação atual e o problema ou oportunidade. Quantifique se possível. (máx. 200 palavras)'},
+          {t:'Objetivo do Projeto',c:'Formato: "Ao final deste projeto, [resultado esperado] estará implementado, gerando [benefício concreto]."'},
+          {t:'Alinhamento Estratégico',c:'Qual iniciativa (K1–K5) e horizonte (H1/H2/H3) este projeto endereça? Justifique em 2–3 frases.'},
+          {t:'Benefícios Esperados',c:'Quantitativos: redução de X horas/mês, atendimento de Y usuários, economia de R$ Z.\nQualitativos: melhoria de experiência, redução de risco operacional.'},
+          {t:'Escopo Preliminar',c:'Incluído: o que ESTÁ no escopo.\nExcluído: o que NÃO está — limite de responsabilidade.'},
+          {t:'Estimativa de Esforço',c:'Estimativa em sprints ou meses. Perfis necessários. Recursos externos (contratos, ferramentas).'},
+          {t:'Riscos Preliminares',c:'Os 3–5 riscos mais relevantes neste momento. Detalhamento virá no Risk Log após aprovação.'},
+          {t:'Decisão da Diretoria (Gate)',c:'☐ Aprovado para Lean Inception\n☐ Reprovado\n☐ Retornar para revisão\n\nData: ___ | Justificativa:'}]},
+
+'personas':{n:'Personas',d:'Representação semi-fictícia dos usuários do projeto. Use um card por persona. Mínimo 2 personas por projeto.',t:'elevator',
+  rows:[{l:'Nome e perfil',c:'Ex.: "Marcos, Analista de TI — 32 anos, experiência média com sistemas, trabalha na SEPLAG."'},
+        {l:'Cargo e contexto',c:'Cargo, área, nível de acesso tecnológico, frequência de uso do sistema a desenvolver.'},
+        {l:'Objetivos',c:'O que esta persona quer conquistar com o produto/serviço entregue pelo projeto?'},
+        {l:'Dores e desafios',c:'Quais problemas ela enfrenta hoje que este projeto pode resolver?'},
+        {l:'Como o projeto a serve',c:'De que forma específica este projeto melhora sua experiência ou resolve sua dor?'},
+        {l:'Critérios de sucesso',c:'Como ela saberá que o projeto foi bem-sucedido? O que esperará ver diferente?'},
+        {l:'Citação',c:'"Uma frase que esta persona diria sobre o problema atual." — humaniza a dor.'}]},
+
+'product-vision':{n:'Product Vision — Elevator Pitch',d:'Declaração de visão compartilhada por todo o squad e stakeholders. Deve caber em 30 segundos. Construída coletivamente na Lean Inception.',t:'elevator',
+  rows:[{l:'Para',c:'[público-alvo — quem usa ou se beneficia do produto]'},
+        {l:'Que',c:'[necessidade, problema ou oportunidade que eles têm]'},
+        {l:'O produto',c:'[nome do produto ou serviço a ser desenvolvido]'},
+        {l:'É um(a)',c:'[categoria — sistema, plataforma, módulo, portal, serviço]'},
+        {l:'Que',c:'[principal benefício — o que ele faz de mais importante]'},
+        {l:'Diferente de',c:'[alternativa atual — processo manual, sistema legado]'},
+        {l:'Nosso produto',c:'[principal diferenciador — por que este produto é melhor]'}]},
+
+'define-success':{n:'Define Success',d:'Alinha squad e Diretoria Colegiada (PO) sobre o que significa o projeto ser um sucesso — antes de começar a executar.',t:'sections',
+  s:[{t:'Situação atual (AS-IS)',c:'Como o processo ou sistema funciona hoje? O que está quebrado, lento ou ausente?'},
+     {t:'Situação desejada (TO-BE)',c:'Como o mundo ficará diferente após a entrega do MVP? Seja específico.'},
+     {t:'Métricas de sucesso (3 a 5)',c:'Indicadores mensuráveis:\nEx.: "Tempo médio de atendimento reduz de 15 para 5 dias úteis."\nEx.: "Taxa de erro cai de 12% para < 2%."'},
+     {t:'Critérios de aceitação — nível de produto',c:'Quais condições mínimas devem ser atendidas para aceite formal pela Diretoria Colegiada?'},
+     {t:'O que NÃO é sucesso',c:'Defina limites para evitar interpretações divergentes ao final do projeto.'},
+     {t:'Prazo para primeiros resultados',c:'Em quantos sprints os primeiros benefícios mensuráveis devem aparecer?'}]},
+
+'definition-of-done':{n:'Definition of Done (DoD)',d:'Critérios que devem ser 100% cumpridos para um incremento ser "pronto". Acordado pelo squad e pelo PO na Lean Inception. Não negociável na execução.',t:'checklist',
+  groups:[{t:'Funcionalidade',items:['User story implementa todos os critérios de aceitação definidos','Comportamento validado contra o Definition of Ready original','Nenhum item ficou parcialmente implementado']},
+          {t:'Qualidade e testes',items:['Testes funcionais executados e aprovados pelo Líder Técnico','Casos alternativos e de erro cobertos','Nenhum bug crítico ou bloqueante aberto']},
+          {t:'Documentação',items:['Documentação mínima produzida (manual, readme, fluxo ou registro de decisão)','Critérios de aceitação atualizados no Sprint Backlog','Decisões técnicas relevantes registradas']},
+          {t:'Processo e aceite',items:['Incremento demonstrado na Sprint Review (Showcase)','Product Owner (Diretoria Colegiada) deu aceite formal','Item marcado como "Done" no Kanban Board']}]},
+
+'mvps':{n:'MVPs — Minimum Viable Products',d:'Mapa dos MVPs que compõem o produto final. Cada MVP deve ser testável e gerador de aprendizado validado. Definido na Lean Inception.',t:'table',
+  h:['MVP #','Nome do MVP','Hipótese a validar','Funcionalidades','Critérios de validação','Sprint previsto','Status'],
+  r:[['MVP 1','Acesso e navegação','Usuários acessam sem fricção','Login, menu, perfil','Sucesso de login > 95%','Sprint 2','Planejado'],
+     ['MVP 2','Funcionalidade core','A função principal resolve o problema-chave','Módulo X completo','Aprovação do PO na Review','Sprint 4','Planejado'],
+     ['MVP 3','Relatórios e exportação','Gestores extraem informação para decisão','PDF e exportação CSV','100% dos formatos funcionando','Sprint 6','Backlog'],
+     ['MVP N','[Nome]','[Hipótese]','[Funcionalidades]','[Critério]','Sprint __','Backlog']]},
+
+'sprint-planning':{n:'Sprint Planning',d:'Reunião no início de cada sprint. Define o Sprint Goal e o que o squad entrega nos próximos 14 dias. Duração sugerida: 2–4h.',t:'sp',
+  meta:[['Sprint #',''],['Início',''],['Fim',''],['SM',''],['Líder Técnico',''],['Capacidade (pts)','']],
+  goal:'Sprint Goal — objetivo do sprint em 1 frase clara e mensurável',
+  h:['ID','User Story','Critérios de Aceitação (resumo)','Story Points','Responsável'],
+  r:[['US-001','Como [usuário], quero [ação] para que [benefício]','Dado X, quando Y, então Z','5','Dev A'],
+     ['US-002','Como [usuário], quero [ação] para que [benefício]','Dado X, quando Y, então Z','3','Dev B'],
+     ['US-00N','...','...','...','...']]},
+
+'sprint-backlog':{n:'Sprint Backlog',d:'Lista de itens comprometidos pelo squad para o sprint corrente. Atualizado diariamente no Daily Meeting. Visível no Kanban Board.',t:'table',
+  h:['ID','User Story / Tarefa','Critérios de Aceitação','Story Points','Responsável','Status','Sprint'],
+  r:[['US-001','Como gestor, quero visualizar painel de metas para acompanhar o progresso','Carrega em <3s; exibe todas as metas; dados atualizados','5','Dev A','Em andamento','#3'],
+     ['US-002','Como analista, quero exportar relatório em PDF para enviar à Diretoria','PDF com formatação PRODEMGE; cabeçalho e assinatura','3','Dev B','A fazer','#3'],
+     ['US-003','Correção: layout quebra em mobile','Responsivo para telas < 768px sem regressão','2','Dev A','A fazer','#3'],
+     ['US-00N','...','...','___','...','A fazer','#_']]},
+
+'daily-meeting':{n:'Daily Meeting',d:'Reunião diária de 15 minutos do squad. Foco em inspeção e adaptação do Sprint Goal — não é reunião de status para o gestor.',t:'daily',
+  meta:[['Data',''],['Sprint #',''],['SM',''],['Presentes','']],
+  qs:[{q:'1. O que foi feito ontem que contribuiu para o Sprint Goal?',p:'• Dev A: finalizou tela de login e integração SSO\n• Dev B: revisou critérios de aceitação da US-002'},
+      {q:'2. O que será feito hoje para contribuir para o Sprint Goal?',p:'• Dev A: inicia integração com API de relatórios\n• Dev B: começa desenvolvimento do módulo de exportação'},
+      {q:'3. Há algum impedimento que esteja bloqueando o progresso?',p:'Nenhum / [SM registra e é responsável por remover]'}],
+  imp_h:['Impedimento','Responsável pela remoção','Prazo','Status'],
+  imp_r:[['[Descreva o impedimento]','SM / [nome]','[data]','Aberto']]},
+
+'kanban-board':{n:'Kanban Board',d:'Visualização do fluxo do sprint. O WIP limit por coluna identifica gargalos rapidamente. Atualizado antes do Daily Meeting.',t:'kanban',
+  cols:['A fazer','Em andamento','Em revisão','Concluído'],
+  wip:[null,3,2,null],
+  cards:[['US-002 (3 pts)','US-003 (2 pts)','US-00N'],['US-001 (5 pts)\nDev A'],[],['US-000 (2 pts)\nAceito ✓']],
+  note:'Implemente no Microsoft Planner, Trello ou Jira. O importante: board sempre visível e atualizado antes do Daily.'},
+
+'burndown-chart':{n:'Burndown Chart',d:'Acompanha o ritmo de entrega do sprint. Linha ideal: redução linear até zero. Linha real: progresso efetivo. Atualizado diariamente.',t:'table',
+  h:['Dia do Sprint','Pontos restantes (ideal)','Pontos restantes (real)','Observação'],
+  r:[['Dia 1','10','10','Início do sprint'],
+     ['Dia 3','8','10','Sem progresso — dependência identificada'],
+     ['Dia 5','6','8','Impedimento removido pelo SM'],
+     ['Dia 7','4','5',''],
+     ['Dia 9','2','3',''],
+     ['Dia 10 (fim)','0','2','Sprint encerrado — 2 pts retornam ao Backlog']],
+  note:'Dica: mantenha em planilha com gráfico de linha (Ideal vs Real). Permite antecipar riscos de não entrega ainda durante o sprint.'},
+
+'sprint-review':{n:'Sprint Review (Showcase)',d:'Evento de inspeção ao final do sprint. O squad demonstra o incremento à Diretoria Colegiada (PO). O PO delibera o aceite e reajusta prioridades.',t:'sections',
+  s:[{t:'Identificação',c:'Sprint #: ___ | Data: ___ | SM (facilitador): ___ | Participantes: Diretoria Colegiada, squad, stakeholders convidados'},
+     {t:'Sprint Goal — resultado',c:'O Sprint Goal foi atingido?\n☐ Totalmente  ☐ Parcialmente  ☐ Não atingido\nJustificativa:'},
+     {t:'Itens concluídos — aceitos pelo PO',c:'• US-001: [título]\n• US-002: [título]'},
+     {t:'Itens não concluídos',c:'• US-003: [título] — motivo: [descreva]'},
+     {t:'Demo realizada',c:'O que foi demonstrado, em qual ambiente e com qual reação dos stakeholders.'},
+     {t:'Feedback da Diretoria Colegiada (PO)',c:'Registre comentários, ajustes de prioridade e novas demandas sinalizadas.'},
+     {t:'Métricas do sprint',c:'Velocidade planejada: ___ pts | Velocidade real: ___ pts | Taxa de entrega: ___% '},
+     {t:'Próximos passos',c:'Itens para o próximo sprint. Alguma mudança de direção? Data do próximo Planning: ___'}]},
+
+'retrospectiva':{n:'Retrospectiva',d:'Evento de melhoria contínua ao final do sprint. O squad inspeciona a si mesmo e define ações concretas. Formato: Start / Stop / Continue.',t:'retro',
+  meta:[['Sprint #',''],['Data',''],['SM (facilitador)',''],['Participantes','']],
+  cols:[{l:'Start — Começar a fazer',bg:'bs',items:['[O que devemos começar a fazer?]','[Prática, ferramenta ou hábito novo]']},
+        {l:'Stop — Parar de fazer',bg:'bd',items:['[O que está atrapalhando e deve parar?]','[Hábito ou processo a eliminar]']},
+        {l:'Continue — Manter',bg:'bi',items:['[O que está funcionando bem?]','[Prática a preservar e reforçar]']}],
+  act_h:['Ação de melhoria','Responsável','Prazo','Status'],
+  act_r:[['[Ação concreta — máx. 3 por sprint]','[Nome]','[data]','Aberto']]},
+
+'acceptance-testing':{n:'Acceptance Testing',d:'Registro formal da homologação do produto antes da entrega oficial à área receptora. Cada critério deve ser testado e documentado.',t:'table',
+  h:['#','Funcionalidade / User Story','Critério de Aceitação','Resultado','Evidência','Aprovado?','Observações'],
+  r:[['1','Portal de acesso','Login via SSO para todos os perfis','Testado — 3 perfis','Print / log de acesso','✓ Sim',''],
+     ['2','Geração de PDF','PDF em < 5s com formatação PRODEMGE','Testado — 10 relatórios','Prints dos PDFs','✓ Sim',''],
+     ['3','Notificação de prazo','E-mail enviado 48h antes do vencimento','Testado — 5 cenários','Log de e-mails','✗ Não','Atraso de 2h — corrigir antes do go-live'],
+     ['N','[Funcionalidade]','[Critério]','[Resultado]','[Evidência]','[ ]',''],
+     ['—','ACEITE FINAL','☐ Aprovado para entrega  ☐ Reprovado — lista de pendências','','','','Data: ___ | Assinatura: ___']]},
+
+'release-planning':{n:'Release Planning',d:'Planejamento da entrega formal do produto à área receptora. Garante transição organizada, documentada e sem lacunas.',t:'sections',
+  s:[{t:'Identificação',c:'Projeto: ___ | Versão: ___ | Data prevista: ___ | SM: ___'},
+     {t:'Funcionalidades incluídas',c:'• MVP 1 — [nome] — Sprints #: ___\n• MVP 2 — [nome] — Sprints #: ___'},
+     {t:'Critérios de saída (exit criteria)',c:'☐ Acceptance Testing aprovado\n☐ DoD cumprida em 100% dos itens\n☐ Documentação entregue e validada\n☐ Treinamento realizado (se aplicável)\n☐ Aceite formal da Diretoria Colegiada registrado'},
+     {t:'Dependências e pré-requisitos',c:'Integrações, infraestrutura, aprovações externas ou contratos necessários. Liste responsáveis e prazos.'},
+     {t:'Plano de rollout',c:'Como a entrega será feita: implantação em produção, comunicação aos usuários, suporte pós-go-live, plano de rollback.'},
+     {t:'Responsabilidades',c:'Líder Técnico: ___ (implantação técnica)\nSM: ___ (coordenação)\nÁrea receptora: ___ (homologação)\nDiretoria Colegiada: ___ (aceite formal)'},
+     {t:'Registro de aceite formal',c:'Data: ___ | Representante da Diretoria: ___\n\n— Projeto encerrado. Vaga liberada no WIP do portfólio. —'}]},
+};
+
+const RITUALS=[
+  {icon:'ti-clock',title:'Daily Meeting',freq:'Todo dia · 15 min',fc:'bi',
+   who:'Squad (SM + Líder Técnico + Devs)',
+   items:['Ontem: o que contribuiu para o Sprint Goal?','Hoje: o que cada membro fará?','Impedimentos: o SM é responsável por remover','Kanban Board atualizado ao final']},
+  {icon:'ti-refresh',title:'Cerimônias do Sprint',freq:'A cada 2 semanas',fc:'bd',
+   who:'Squad + Diretoria Colegiada (PO)',
+   items:['Sprint Planning — define o Sprint Goal e o backlog','Refinement (meio do sprint) — priorização e estimativas','Sprint Review / Showcase — demo e aceite do PO','Retrospectiva — ações de melhoria contínua']},
+  {icon:'ti-presentation',title:'Portfolio Meeting',freq:'Mensal · integrado ao RAE',fc:'bs',
+   who:'Diretoria Colegiada + SER + SMs ativos',
+   items:['Status de todos os squads ativos (CFD + Burndown)','Revisão e priorização do Portfolio Backlog (WSJF)','Gestão de riscos do portfólio (Risk Log)','Deliberação sobre novos Gates de Entrada','Ajuste de prioridades estratégicas K1–K5']},
+  {icon:'ti-door-enter',title:'Gate de Entrada',freq:'Por demanda',fc:'bw',
+   who:'Diretoria Colegiada + SER + Demandante',
+   items:['Apresentação do Business Case pela área demandante','Verificação de alinhamento K1–K5 / H1–H3','Verificação de WIP disponível (máx. 4 squads)','Decisão: Aprovar / Reprovar / Revisar','Designação do Squad: SM + Líder Técnico']},
+];
+
+let curP=0,curA='portfolio-backlog';
+
+function selP(id){
+  curP=id;curA=PH[id].arts[0];
+  document.querySelectorAll('.svgph').forEach(g=>g.classList.remove('sel','dim'));
+  PH.forEach(p=>{const g=document.getElementById('svgp'+p.id);if(g)g.classList.add(p.id===id?'sel':'dim');});
+  renderPnav();renderPcard();renderAnav();renderTmpl();
+  document.getElementById('tmpl-sec').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function selA(k){curA=k;renderAnav();renderTmpl();}
+
+function renderPnav(){
+  document.getElementById('pnav').innerHTML=PH.map(p=>`
+    <button class="ptab${p.id===curP?' on':''}" onclick="selP(${p.id})">
+      <span class="pdot" style="background:${p.dot}"></span>${p.name}
+    </button>`).join('');
+}
+
+function renderPcard(){
+  const p=PH[curP];
+  document.getElementById('pcard').innerHTML=`
+    <div class="pcard">
+      <div class="pcard-bar" style="background:${p.acc}"></div>
+      <p class="pcard-name">${p.name} <span style="font-size:11px;font-weight:400;color:var(--color-text-tertiary)">— ${p.sub}</span></p>
+      <p class="pcard-desc">${p.desc}</p>
+      <div class="pcard-meta">
+        <span class="pmeta"><i class="ti ti-clock" aria-hidden="true"></i>${p.dur}</span>
+        <span class="pmeta"><i class="ti ti-users" aria-hidden="true"></i>${p.who}</span>
+      </div>
+    </div>`;
+}
+
+function renderAnav(){
+  const arts=PH[curP].arts;
+  document.getElementById('anav').innerHTML=arts.map(k=>`
+    <button class="atab${k===curA?' on':''}" onclick="selA('${k}')">${A[k]?A[k].n:'?'}</button>`).join('');
+}
+
+function renderTmpl(){
+  const a=A[curA];if(!a){document.getElementById('tmpl').innerHTML='';return;}
+  let body='';
+  if(['table','wsjf','cfd','sprint-backlog','acceptance-testing','burndown-chart','mvps'].includes(a.t))body=rTable(a);
+  else if(['sections','sprint-review','release-planning','define-success','strategic-theme'].includes(a.t))body=rSections(a);
+  else if(a.t==='bc')body=rBC(a);
+  else if(a.t==='elevator')body=rElevator(a);
+  else if(a.t==='checklist')body=rChecklist(a);
+  else if(a.t==='sp')body=rSP(a);
+  else if(a.t==='daily')body=rDaily(a);
+  else if(a.t==='kanban')body=rKanban(a);
+  else if(a.t==='retro')body=rRetro(a);
+  document.getElementById('tmpl').innerHTML=`<p class="tname">${a.n}</p><p class="tdesc">${a.d}</p>${body}`;
+}
+
+function rTable(a){
+  let h='<div class="tov"><table><tr>'+a.h.map(x=>`<th>${x}</th>`).join('')+'</tr>';
+  h+=a.r.map(r=>'<tr>'+r.map(c=>`<td>${c}</td>`).join('')+'</tr>').join('');
+  h+='</table></div>';
+  if(a.note)h+=`<p class="note">${a.note}</p>`;
+  return h;
+}
+function rSections(a){return(a.s||a.sections||[]).map(s=>`<div class="sb"><p class="sb-t">${s.t}</p><p class="sb-c">${s.c}</p></div>`).join('');}
+function rBC(a){return a.blocks.map(b=>`<div class="sb"><p class="sb-t">${b.t}</p>${b.fields?`<div class="frow">${b.fields.map(([l])=>`<div class="fld"><span class="fld-l">${l}</span><span class="fld-v">—</span></div>`).join('')}</div>`:`<p class="sb-c">${b.c}</p>`}</div>`).join('');}
+function rElevator(a){return`<div class="ep-wrap">${a.rows.map(r=>`<div class="ep-row"><div class="ep-l">${r.l}</div><div class="ep-v">${r.c}</div></div>`).join('')}</div>`;}
+function rChecklist(a){return a.groups.map(g=>`<p class="grpt">${g.t}</p>${g.items.map(i=>`<div class="chk"><div class="chkb"></div><span class="chkt">${i}</span></div>`).join('')}`).join('');}
+function rSP(a){
+  let h=`<div class="frow">${a.meta.map(([l])=>`<div class="fld"><span class="fld-l">${l}</span><span class="fld-v">—</span></div>`).join('')}</div>`;
+  h+=`<div class="sb"><p class="sb-t">${a.goal}</p><p class="sb-c">—</p></div>`;
+  h+=`<p class="grpt">Itens comprometidos</p>`;
+  h+=`<div class="tov"><table><tr>${a.h.map(x=>`<th>${x}</th>`).join('')}</tr>${a.r.map(r=>'<tr>'+r.map(c=>`<td>${c}</td>`).join('')+'</tr>').join('')}</table></div>`;
+  return h;
+}
+function rDaily(a){
+  let h=`<div class="frow">${a.meta.map(([l])=>`<div class="fld"><span class="fld-l">${l}</span><span class="fld-v">—</span></div>`).join('')}</div>`;
+  h+=a.qs.map(q=>`<div class="sb"><p class="sb-t">${q.q}</p><p class="sb-c">${q.p}</p></div>`).join('');
+  h+=`<p class="grpt">Impedimentos identificados</p>`;
+  h+=`<div class="tov"><table><tr>${a.imp_h.map(x=>`<th>${x}</th>`).join('')}</tr>${a.imp_r.map(r=>'<tr>'+r.map(c=>`<td>${c}</td>`).join('')+'</tr>').join('')}</table></div>`;
+  return h;
+}
+function rKanban(a){
+  let h='<div class="kboard">';
+  h+=a.cols.map((col,i)=>{
+    const w=a.wip[i];const cs=a.cards[i]||[];
+    return`<div class="kcol"><p class="kcol-t">${col}</p>${w?`<p class="kwip">WIP ≤ ${w}</p>`:''}`+
+    cs.filter(c=>c).map(c=>`<div class="kcard">${c.replace(/\n/g,'<br>')}</div>`).join('')+
+    `<div class="kcard" style="border-style:dashed;opacity:.35">+ adicionar</div></div>`;
+  }).join('');
+  h+='</div>';
+  if(a.note)h+=`<p class="note">${a.note}</p>`;
+  return h;
+}
+function rRetro(a){
+  let h=`<div class="frow">${a.meta.map(([l])=>`<div class="fld"><span class="fld-l">${l}</span><span class="fld-v">—</span></div>`).join('')}</div>`;
+  h+='<div class="rg3">'+a.cols.map(c=>`<div class="rcol"><p class="rcol-t ${c.bg}">${c.l}</p>${c.items.map(i=>`<div class="ritem">${i}</div>`).join('')}</div>`).join('')+'</div>';
+  h+=`<p class="grpt">Ações de melhoria (máx. 3)</p>`;
+  h+=`<div class="tov"><table><tr>${a.act_h.map(x=>`<th>${x}</th>`).join('')}</tr>${a.act_r.map(r=>'<tr>'+r.map(c=>`<td>${c}</td>`).join('')+'</tr>').join('')}</table></div>`;
+  return h;
+}
+
+function renderRituals(){
+  document.getElementById('rituals').innerHTML=RITUALS.map(r=>`
+    <div class="rit-card">
+      <div class="rit-top">
+        <i class="ti ${r.icon} rit-icon" aria-hidden="true"></i>
+        <span class="rit-freq ${r.fc}">${r.freq}</span>
+      </div>
+      <p class="rit-title">${r.title}</p>
+      <p class="rit-who"><i class="ti ti-users" aria-hidden="true"></i>${r.who}</p>
+      <ul class="rit-ul">${r.items.map(i=>`<li>${i}</li>`).join('')}</ul>
+    </div>`).join('');
+}
+
+renderPnav();renderPcard();renderAnav();renderTmpl();renderRituals();
+document.querySelectorAll('.svgph').forEach(g=>g.classList.add('dim'));
+document.getElementById('svgp0').classList.remove('dim');
+document.getElementById('svgp0').classList.add('sel');
+</script>
